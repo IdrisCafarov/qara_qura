@@ -5,6 +5,8 @@ from .models import *
 from .serializers import *
 from rest_framework.parsers import MultiPartParser,FormParser
 from rest_framework import viewsets
+# from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 # Create your views here.
 
@@ -32,18 +34,35 @@ class ProductCreateView(viewsets.ModelViewSet):
         return Response(serializer.data, status=201)
 
 
-@api_view(['GET'])
-def product_view(request):
-    if request.method == 'GET':
-        product = Product.objects.filter(draft=True)
-        serializer = ProductSerializer(product, many=True)
-        return Response(serializer.data)
+# class ProductListView(generics.ListCreateAPIView):
+#     queryset = Product.objects.all()
+#     filter_backends = (DjangoFilterBackend,)
+#     filterset_class = ProductFilter
+#     # pagination_class = CustomPagination
+
+#     # def get_queryset(self, *args, **kwargs):
+#     #     request = self.request
+#     #     queryset = Product.objects.all()
+#     #     # category = request.GET.get("category", None)
+#     #     # search = request.GET.get("search", None)
+#     #     # if category:
+#     #     #     queryset = queryset.filter(subcategory__category__id=int(category))
+#     #     return queryset
+
+#     def get_serializer_class(self):
+#         if self.request.method == "GET":
+#             return ProductSerializer
+#         return CreateProductSerializer
+
+#     def perform_create(self, serializer):
+#         return serializer.save(user=self.request.user)
 
 @api_view(['GET'])
 def product_detail(request,id):
     if request.method == 'GET':
         product = Product.objects.filter(draft=True,id=id)
         serializer = ProductSerializer(product, many=True)
+        parser_classes = (MultiPartParser, FormParser)
         return Response(serializer.data)
 
 

@@ -13,7 +13,7 @@ class CreateProductSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False)
     class Meta:
         model = Product
-        fields = ('image',)
+        fields = ('image','description')
 
     def create(self, validated_data):
         instance = Product.objects.create(
