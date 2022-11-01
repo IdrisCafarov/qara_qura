@@ -8,7 +8,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to="Images",verbose_name="Add Image")
     created_date = models.DateTimeField(auto_now=True)
     updated_date = models.DateTimeField(auto_now_add=True)
-    description = models.TextField(verbose_name="Description",null=True)
+    description = models.TextField(verbose_name="Description",null=True,blank=True)
     draft = models.BooleanField(verbose_name="Show",default=False)
 
     def __str__(self):

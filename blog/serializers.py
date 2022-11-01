@@ -9,6 +9,8 @@ class AboutSerializer(serializers.ModelSerializer):
 
 
 class CreateProductSerializer(serializers.ModelSerializer):
+
+    image = serializers.ImageField(required=False)
     class Meta:
         model = Product
         fields = ('image','description',)

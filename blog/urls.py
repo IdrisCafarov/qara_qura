@@ -8,3 +8,6 @@ urlpatterns = [
     path("post_detail/<id>/", product_detail, name="post_detail"),
     path("create_contact/", ContactCreateView.as_view(), name="create_contact"),
 ]
+
+
+
