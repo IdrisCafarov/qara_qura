@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import *
 from .serializers import *
-from rest_framework.parsers import JSONParser
+from rest_framework.parsers import MultiPartParser,FormParser
 
 # Create your views here.
 
@@ -19,7 +19,7 @@ def about_view(request):
 class ProductCreateView(generics.CreateAPIView):
     queryset = Product.objects.all()
     serializer_class = CreateProductSerializer
-    parser_classes = [JSONParser]
+    parser_classes = (MultiPartParser, FormParser)
 
     # def perform_create(self, serializer):
     #     return serializer.save(user=self.request.user)
