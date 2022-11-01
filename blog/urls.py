@@ -2,7 +2,7 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path("about/", about_view, name="about"),
+    path("about_main/", about_view, name="about"),
     path("about_header/", about_header_view, name="about_header"),
     path("create_post/", ProductCreateView.as_view({
     'post': 'create'

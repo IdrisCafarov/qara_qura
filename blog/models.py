@@ -17,10 +17,8 @@ class Product(models.Model):
     
 
 class About(models.Model):
-    text_1 = models.TextField(verbose_name="Text 1")
-    text_2 = models.TextField(verbose_name="Text 2")
-    text_3 = models.TextField(verbose_name="Text 3")
-
+    title_1 = models.CharField(max_length=150,verbose_name="Title 1")
+    title_2 = models.CharField(max_length=150,verbose_name="Title 2")
 
     def __str__(self):
         return "About"
