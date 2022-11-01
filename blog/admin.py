@@ -6,7 +6,7 @@ from .models import *
 admin.site.register(Product)
 admin.site.register(Contact)
 admin.site.register(AboutHeader)
-
+admin.site.register(Instructor)
 MAX_OBJECTS = 1
 
 @admin.register(About)

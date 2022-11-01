@@ -46,5 +46,22 @@ class AboutHeader(models.Model):
         return self.header
     
 
+class AboutHeader_2(models.Model):
+    header = models.CharField(max_length=100,verbose_name="Header")
+    content = models.TextField(verbose_name="Content")
+
+    def __str__(self):
+        return self.header
+
+
+class Instructor(models.Model):
+    name = models.CharField(max_length=100,verbose_name="Name")
+    surname = models.CharField(max_length=100,verbose_name="Surname")
+    position = models.CharField(max_length=100,verbose_name="Position")
+    image = models.ImageField(upload_to="Instructors")
+
+    def __str__(self):
+        return self.name+' '+self.surname
+    
     
 

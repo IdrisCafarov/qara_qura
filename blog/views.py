@@ -26,6 +26,13 @@ def about_header_view(request):
         serializer = AboutHeaderSerializer(about, many=True)
         return Response(serializer.data)
 
+@api_view(['GET'])
+def about_header_2_view(request):
+    if request.method == 'GET':
+        about = AboutHeader_2.objects.all()
+        serializer = AboutHeader_2Serializer(about, many=True)
+        return Response(serializer.data)
+
 class ProductCreateView(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = CreateProductSerializer
@@ -60,6 +67,30 @@ class ProductListView(viewsets.ModelViewSet):
         if self.request.method == "GET":
             return ProductSerializer
         return CreateProductSerializer
+
+    def perform_create(self, serializer):
+        return serializer.save()
+
+
+class InstructorListView(viewsets.ModelViewSet):
+    queryset = Instructor.objects.all()
+    parser_classes = (MultiPartParser, FormParser)
+    
+    # pagination_class = CustomPagination
+
+    # def get_queryset(self, *args, **kwargs):
+    #     request = self.request
+    #     queryset = Product.objects.all()
+    #     # category = request.GET.get("category", None)
+    #     # search = request.GET.get("search", None)
+    #     # if category:
+    #     #     queryset = queryset.filter(subcategory__category__id=int(category))
+    #     return queryset
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return InstructorSerializer
+        return CreateInstructorSerializer
 
     def perform_create(self, serializer):
         return serializer.save()

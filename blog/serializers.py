@@ -13,6 +13,12 @@ class AboutHeaderSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class AboutHeader_2Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = AboutHeader_2
+        fields = '__all__'
+
+
 class CreateProductSerializer(serializers.ModelSerializer):
 
     image = serializers.ImageField(required=False)
@@ -31,6 +37,27 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
+
+
+class CreateInstructorSerializer(serializers.ModelSerializer):
+
+    image = serializers.ImageField(required=False)
+    class Meta:
+        model = Instructor
+        fields = '__all__'
+
+    def create(self, validated_data):
+        instance = Product.objects.create(
+            **validated_data
+        )
+        return instance
+
+
+class InstructorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Instructor
+        fields = '__all__'
+
 
 
 
