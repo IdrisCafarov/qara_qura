@@ -5,6 +5,7 @@ from .models import *
 from .serializers import *
 from rest_framework.parsers import MultiPartParser,FormParser
 from rest_framework import viewsets
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -56,13 +57,28 @@ class ProductListView(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         return serializer.save()
 
-@api_view(['GET'])
-def product_detail(request,id):
-    if request.method == 'GET':
-        product = Product.objects.filter(draft=True,id=id)
-        serializer = ProductSerializer(product, many=True)
-        parser_classes = (MultiPartParser, FormParser)
-        return Response(serializer.data)
+# class product_detail(viewsets.ModelViewSet):
+#     # queryset = Product.objects.filter(draft=True)
+    
+#     parser_classes = (MultiPartParser, FormParser)
+#     lookup_field = "id"
+    
+    
+#     def get_queryset(self, *args, **kwargs):
+#         id = self.kwargs["id"]
+        
+#         queryset = get_object_or_404(Product,id=id,draft=True)
+
+#         return queryset
+
+#     def get_serializer_class(self):
+#         if self.request.method == "GET":
+#             return ProductSerializer
+#         return CreateProductSerializer
+
+#     def perform_create(self, serializer):
+#         return serializer.save()
+
 
 
 class ContactCreateView(generics.CreateAPIView):

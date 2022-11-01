@@ -29,6 +29,8 @@ class About(models.Model):
 
 class Contact(models.Model):
     name = models.CharField(max_length=25,verbose_name="Name")
+    surname = models.CharField(max_length=25,verbose_name="Surname",null=True)
+    number = models.CharField(max_length=20,verbose_name="Number",null=True)
     email = models.EmailField(max_length=30,verbose_name="Email")
     text = models.TextField(verbose_name="Message")
 
