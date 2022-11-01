@@ -1,5 +1,5 @@
 Django==3.2
-django-modeltranslation==0.16.2
+django-cors-headers==3.13.0
 django-cleanup==6.0.0
 django-ckeditor==5.6.1
 django-crispy-forms==1.13.0
