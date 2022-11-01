@@ -7,7 +7,9 @@ urlpatterns = [
     'get': 'list',
     'post': 'create'
     }), name="create_post"),
-    # path("post_list/", product_view, name="post_list"),
+    path("post_list/", ProductListView.as_view({
+    'get': 'list',
+    }), name="post_list"),
     path("post_detail/<id>/", product_detail, name="post_detail"),
     path("create_contact/", ContactCreateView.as_view(), name="create_contact"),
 ]
