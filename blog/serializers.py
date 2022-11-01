@@ -7,6 +7,11 @@ class AboutSerializer(serializers.ModelSerializer):
         model = About
         fields = '__all__'
 
+class AboutHeaderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AboutHeader
+        fields = '__all__'
+
 
 class CreateProductSerializer(serializers.ModelSerializer):
 

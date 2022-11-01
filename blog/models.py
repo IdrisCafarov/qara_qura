@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 from ckeditor.fields import RichTextField
 
@@ -16,9 +17,9 @@ class Product(models.Model):
     
 
 class About(models.Model):
-    text_1 = RichTextField(verbose_name="Text 1")
-    text_2 = RichTextField(verbose_name="Text 1")
-    text_3 = RichTextField(verbose_name="Text 1")
+    text_1 = models.TextField(verbose_name="Text 1")
+    text_2 = models.TextField(verbose_name="Text 2")
+    text_3 = models.TextField(verbose_name="Text 3")
 
 
     def __str__(self):
@@ -36,5 +37,16 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.email
+
+
+
+class AboutHeader(models.Model):
+    header = models.CharField(max_length=100,verbose_name="Header")
+    content = models.TextField(verbose_name="Content")
+
+    def __str__(self):
+        return self.header
+    
+
     
 

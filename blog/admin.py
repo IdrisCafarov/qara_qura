@@ -5,6 +5,7 @@ from .models import *
 
 admin.site.register(Product)
 admin.site.register(Contact)
+admin.site.register(AboutHeader)
 
 MAX_OBJECTS = 1
 
@@ -15,4 +16,7 @@ class AdminAbout(admin.ModelAdmin):
           if self.model.objects.count() >= MAX_OBJECTS:
                return False
           return super().has_add_permission(request)
+
+
+    
 

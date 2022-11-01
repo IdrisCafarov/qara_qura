@@ -19,6 +19,13 @@ def about_view(request):
         return Response(serializer.data)
 
 
+@api_view(['GET'])
+def about_header_view(request):
+    if request.method == 'GET':
+        about = AboutHeader.objects.all()
+        serializer = AboutHeaderSerializer(about, many=True)
+        return Response(serializer.data)
+
 class ProductCreateView(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = CreateProductSerializer
