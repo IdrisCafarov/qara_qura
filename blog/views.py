@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from .models import *
 from .serializers import *
 from rest_framework.parsers import MultiPartParser,FormParser
+from rest_framework import viewsets
 
 # Create your views here.
 
@@ -16,7 +17,7 @@ def about_view(request):
         return Response(serializer.data)
 
 
-class ProductCreateView(generics.CreateAPIView):
+class ProductCreateView(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = CreateProductSerializer
     parser_classes = (MultiPartParser, FormParser)
