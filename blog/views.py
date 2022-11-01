@@ -21,8 +21,8 @@ class ProductCreateView(generics.CreateAPIView):
     serializer_class = CreateProductSerializer
     parser_classes = (MultiPartParser, FormParser)
 
-    # def perform_create(self, serializer):
-    #     return serializer.save(user=self.request.user)
+    def perform_create(self, serializer):
+        return serializer.save()
 
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
