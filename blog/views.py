@@ -12,8 +12,8 @@ from django.shortcuts import get_object_or_404, render
 
 
 
-def index_view(request):
-    return render(request,"index.html")
+# def index_view(request):
+#     return render(request,"index.html")
 
 @api_view(['GET'])
 def about_view(request):
