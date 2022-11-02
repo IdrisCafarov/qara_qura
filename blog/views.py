@@ -5,11 +5,15 @@ from .models import *
 from .serializers import *
 from rest_framework.parsers import MultiPartParser,FormParser
 from rest_framework import viewsets
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 
 
 # Create your views here.
 
+
+
+def index_view(request):
+    return render(request,"index.html")
 
 @api_view(['GET'])
 def about_view(request):
