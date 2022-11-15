@@ -91,6 +91,32 @@ class ProductListView(viewsets.ModelViewSet):
         return serializer.save()
 
 
+
+class SolutionListView(viewsets.ModelViewSet):
+    queryset = Solution.objects.all()
+    parser_classes = (MultiPartParser, FormParser)
+    
+    # pagination_class = CustomPagination
+
+    # def get_queryset(self, *args, **kwargs):
+    #     request = self.request
+    #     queryset = Product.objects.all()
+    #     # category = request.GET.get("category", None)
+    #     # search = request.GET.get("search", None)
+    #     # if category:
+    #     #     queryset = queryset.filter(subcategory__category__id=int(category))
+    #     return queryset
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return SolutionSerializer
+        return CreateSolutionSerializer
+
+    def perform_create(self, serializer):
+        return serializer.save()
+
+
+
 class GeneralSettingsListView(viewsets.ModelViewSet):
     queryset = GeneralSettings.objects.all()
     parser_classes = (MultiPartParser, FormParser)

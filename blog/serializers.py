@@ -57,6 +57,11 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = '__all__'
 
+class SolutionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Solution
+        fields = '__all__'
+
 
 class GeneralSettingsSerializer(serializers.ModelSerializer):
     class Meta:

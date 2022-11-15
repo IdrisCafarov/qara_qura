@@ -28,6 +28,10 @@ urlpatterns = [
     'post': 'create'
     }), name="create_solution"),
 
+    path("solution_list/", SolutionListView.as_view({
+    'get': 'list',
+    }), name="solution_list"),
+
 
     path("create_contact/", ContactCreateView.as_view(), name="create_contact"),
 ]
