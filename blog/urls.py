@@ -12,12 +12,23 @@ urlpatterns = [
     path("post_list/", ProductListView.as_view({
     'get': 'list',
     }), name="post_list"),
+    path("general_set/", GeneralSettingsListView.as_view({
+    'get': 'list',
+    }), name="general_set"),
     path("instructor_list/", InstructorListView.as_view({
     'get': 'list',
     }), name="instructor_list"),
-    # path("post_detail/<id>/", product_detail.as_view({
-    # 'get': 'list'
-    # }), name="post_detail"),
+
+
+    path("post_detail/<id>/", product_detail.as_view({
+    'get': 'list',
+    }), name="post_detail"),
+
+    path("create_solution/", SolutionCreateView.as_view({
+    'post': 'create'
+    }), name="create_solution"),
+
+
     path("create_contact/", ContactCreateView.as_view(), name="create_contact"),
 ]
 

@@ -5,7 +5,7 @@ from .models import *
 from .serializers import *
 from rest_framework.parsers import MultiPartParser,FormParser
 from rest_framework import viewsets
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_list_or_404, render
 
 
 # Create your views here.
@@ -52,6 +52,21 @@ class ProductCreateView(viewsets.ModelViewSet):
         return Response(serializer.data, status=201)
 
 
+class SolutionCreateView(viewsets.ModelViewSet):
+    queryset = Solution.objects.all()
+    serializer_class = CreateSolutionSerializer
+    parser_classes = (MultiPartParser, FormParser)
+
+    def perform_create(self, serializer):
+        return serializer.save()
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=201)
+
+
 class ProductListView(viewsets.ModelViewSet):
     queryset = Product.objects.filter(draft=True)
     parser_classes = (MultiPartParser, FormParser)
@@ -71,6 +86,29 @@ class ProductListView(viewsets.ModelViewSet):
         if self.request.method == "GET":
             return ProductSerializer
         return CreateProductSerializer
+
+    def perform_create(self, serializer):
+        return serializer.save()
+
+
+class GeneralSettingsListView(viewsets.ModelViewSet):
+    queryset = GeneralSettings.objects.all()
+    parser_classes = (MultiPartParser, FormParser)
+    
+    # pagination_class = CustomPagination
+
+    # def get_queryset(self, *args, **kwargs):
+    #     request = self.request
+    #     queryset = Product.objects.all()
+    #     # category = request.GET.get("category", None)
+    #     # search = request.GET.get("search", None)
+    #     # if category:
+    #     #     queryset = queryset.filter(subcategory__category__id=int(category))
+    #     return queryset
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return GeneralSettingsSerializer
 
     def perform_create(self, serializer):
         return serializer.save()
@@ -99,27 +137,27 @@ class InstructorListView(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         return serializer.save()
 
-# class product_detail(viewsets.ModelViewSet):
-#     # queryset = Product.objects.filter(draft=True)
+class product_detail(viewsets.ModelViewSet):
+    # queryset = Product.objects.filter(draft=True)
     
-#     parser_classes = (MultiPartParser, FormParser)
-#     lookup_field = "id"
+    parser_classes = (MultiPartParser, FormParser)
+    lookup_field = "id"
     
     
-#     def get_queryset(self, *args, **kwargs):
-#         id = self.kwargs["id"]
+    def get_queryset(self, *args, **kwargs):
+        id = self.kwargs["id"]
         
-#         queryset = get_object_or_404(Product,id=id,draft=True)
+        queryset = get_list_or_404(Product,id=id,draft=True)
 
-#         return queryset
+        return queryset
 
-#     def get_serializer_class(self):
-#         if self.request.method == "GET":
-#             return ProductSerializer
-#         return CreateProductSerializer
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return ProductSerializer
+        return CreateProductSerializer
 
-#     def perform_create(self, serializer):
-#         return serializer.save()
+    def perform_create(self, serializer):
+        return serializer.save()
 
 
 

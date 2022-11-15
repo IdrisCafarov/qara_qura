@@ -4,9 +4,21 @@ from ckeditor.fields import RichTextField
 
 # Create your models here.
 
+class GeneralSettings(models.Model):
+    logo = models.FileField(upload_to="Logo")
+    header_text = models.TextField()
+    footer_1 = models.CharField(max_length=50)
+    footer_2 = models.CharField(max_length=50)
+    footer_3 = models.CharField(max_length=50,null=True)
+
+
+
 
 class Product(models.Model):
-    image = models.ImageField(upload_to="Images",verbose_name="Add Image")
+    image_1 = models.ImageField(upload_to="Images",verbose_name="Add Image")
+    image_2 = models.ImageField(upload_to="Images",verbose_name="Add Image",null=True,blank=True)
+    image_3 = models.ImageField(upload_to="Images",verbose_name="Add Image",null=True,blank=True)
+    image_4 = models.ImageField(upload_to="Images",verbose_name="Add Image",null=True,blank=True)
     created_date = models.DateTimeField(auto_now=True)
     updated_date = models.DateTimeField(auto_now_add=True)
     description = models.TextField(verbose_name="Description",null=True,blank=True)
@@ -62,6 +74,22 @@ class Instructor(models.Model):
 
     def __str__(self):
         return self.name+' '+self.surname
+
+
+class Solution(models.Model):
+    image_1 = models.ImageField(upload_to="Images",verbose_name="Add Image")
+    image_2 = models.ImageField(upload_to="Images",verbose_name="Add Image",null=True,blank=True)
+    image_3 = models.ImageField(upload_to="Images",verbose_name="Add Image",null=True,blank=True)
+    image_4 = models.ImageField(upload_to="Images",verbose_name="Add Image",null=True,blank=True)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name="solution")
+    created_date = models.DateTimeField(auto_now=True)
+    updated_date = models.DateTimeField(auto_now_add=True)
+    description = models.TextField(verbose_name="Description",null=True,blank=True)
+
+
+    
+    
+
     
     
 
