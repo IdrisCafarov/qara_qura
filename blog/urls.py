@@ -24,6 +24,11 @@ urlpatterns = [
     'get': 'list',
     }), name="post_detail"),
 
+     path("solution_detail/<id>/", solution_detail.as_view({
+    'get': 'list',
+    }), name="solution_detail"),
+
+
     path("create_solution/", SolutionCreateView.as_view({
     'post': 'create'
     }), name="create_solution"),

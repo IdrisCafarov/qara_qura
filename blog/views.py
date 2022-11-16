@@ -185,6 +185,27 @@ class product_detail(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         return serializer.save()
 
+class solution_detail(viewsets.ModelViewSet):
+    # queryset = Product.objects.filter(draft=True)
+    
+    parser_classes = (MultiPartParser, FormParser)
+    lookup_field = "id"
+    
+    
+    def get_queryset(self, *args, **kwargs):
+        id = self.kwargs["id"]
+        
+        queryset = get_list_or_404(Solution,id=id)
+
+        return queryset
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return SolutionSerializer
+        return CreateSolutionSerializer
+
+    def perform_create(self, serializer):
+        return serializer.save()
 
 
 class ContactCreateView(generics.CreateAPIView):
