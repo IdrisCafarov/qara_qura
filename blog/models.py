@@ -15,7 +15,7 @@ class GeneralSettings(models.Model):
 
 
 class Product(models.Model):
-    image = models.ImageField(upload_to="Images",verbose_name="Add Image")
+    image = models.ImageField(upload_to="Images",verbose_name="Add Image",null=True)
     created_date = models.DateTimeField(auto_now=True)
     updated_date = models.DateTimeField(auto_now_add=True)
     description = models.TextField(verbose_name="Description",null=True,blank=True)
@@ -23,6 +23,8 @@ class Product(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+        
     
 
 class About(models.Model):

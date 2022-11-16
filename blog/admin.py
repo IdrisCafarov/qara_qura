@@ -9,6 +9,7 @@ admin.site.register(AboutHeader)
 admin.site.register(AboutHeader_2)
 admin.site.register(Instructor)
 admin.site.register(Solution)
+
 MAX_OBJECTS = 1
 
 @admin.register(About)

@@ -21,17 +21,29 @@ class AboutHeader_2Serializer(serializers.ModelSerializer):
 
 class CreateProductSerializer(serializers.ModelSerializer):
 
-    image = serializers.ImageField(required=False)
+    # image = serializers.ImageField(required=False)
     
-    class Meta:
-        model = Product
-        fields = ('image','description')
+    # class Meta:
+    #     model = Product
+    #     fields = ('image','description')
+
+    # def create(self, validated_data):
+    #     instance = Product.objects.create(
+    #         **validated_data
+    #     )
+    #     return instance
 
     def create(self, validated_data):
-        instance = Product.objects.create(
-            **validated_data
-        )
-        return instance
+        documents = self.context['documents']
+        post = Product.objects.create(**validated_data)
+        for document in documents:
+            Product.objects.create(image=document)
+        return post
+        
+
+    class Meta:
+        model = Product
+        fields = ('image',)
 
 class CreateSolutionSerializer(serializers.ModelSerializer):
 
