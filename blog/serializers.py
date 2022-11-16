@@ -25,7 +25,7 @@ class CreateProductSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Product
-        fields = ('image_1','image_2','image_3','image_4','description')
+        fields = ('image','description')
 
     def create(self, validated_data):
         instance = Product.objects.create(
@@ -39,7 +39,7 @@ class CreateSolutionSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Solution
-        fields = ('image_1','image_2','image_3','product','image_4','description')
+        fields = ('image','product','description')
 
     def create(self, validated_data):
         instance = Solution.objects.create(
