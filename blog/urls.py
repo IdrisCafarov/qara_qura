@@ -24,7 +24,7 @@ urlpatterns = [
     'get': 'list',
     }), name="post_detail"),
 
-     path("solution_detail/<id>/", solution_detail.as_view({
+    path("solution_detail/<id>/", solution_detail.as_view({
     'get': 'list',
     }), name="solution_detail"),
 

@@ -15,10 +15,7 @@ class GeneralSettings(models.Model):
 
 
 class Product(models.Model):
-    image_1 = models.ImageField(upload_to="Images",verbose_name="Add Image")
-    image_2 = models.ImageField(upload_to="Images",verbose_name="Add Image",null=True,blank=True)
-    image_3 = models.ImageField(upload_to="Images",verbose_name="Add Image",null=True,blank=True)
-    image_4 = models.ImageField(upload_to="Images",verbose_name="Add Image",null=True,blank=True)
+    image = models.ImageField(upload_to="Images",verbose_name="Add Image")
     created_date = models.DateTimeField(auto_now=True)
     updated_date = models.DateTimeField(auto_now_add=True)
     description = models.TextField(verbose_name="Description",null=True,blank=True)

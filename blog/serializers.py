@@ -21,10 +21,8 @@ class AboutHeader_2Serializer(serializers.ModelSerializer):
 
 class CreateProductSerializer(serializers.ModelSerializer):
 
-    image_1 = serializers.ImageField(required=False)
-    image_2 = serializers.ImageField(required=False)
-    image_3 = serializers.ImageField(required=False)
-    image_4 = serializers.ImageField(required=False)
+    image = serializers.ImageField(required=False)
+    
     class Meta:
         model = Product
         fields = ('image_1','image_2','image_3','image_4','description')
@@ -37,10 +35,8 @@ class CreateProductSerializer(serializers.ModelSerializer):
 
 class CreateSolutionSerializer(serializers.ModelSerializer):
 
-    image_1 = serializers.ImageField(required=False)
-    image_2 = serializers.ImageField(required=False)
-    image_3 = serializers.ImageField(required=False)
-    image_4 = serializers.ImageField(required=False)
+    image = serializers.ImageField(required=False)
+    
     class Meta:
         model = Solution
         fields = ('image_1','image_2','image_3','product','image_4','description')
