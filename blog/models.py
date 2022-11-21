@@ -7,9 +7,9 @@ from ckeditor.fields import RichTextField
 class GeneralSettings(models.Model):
     logo = models.FileField(upload_to="Logo")
     header_text = models.TextField()
-    footer_1 = models.CharField(max_length=50)
-    footer_2 = models.CharField(max_length=50)
-    footer_3 = models.CharField(max_length=50,null=True)
+    instagram = models.CharField(max_length=50)
+    linkedin = models.CharField(max_length=50)
+    facebook = models.CharField(max_length=50,null=True)
 
 
 
