@@ -48,7 +48,7 @@ class ProductCreateView(viewsets.ModelViewSet):
         return serializer.save()
 
     def create(self, request, *args, **kwargs):
-        documents = request.FILES.getlist('document', None)
+        documents = request.POST.getlist('document', None)
         data = {
             "title": request.POST.get('title', None),
             }
