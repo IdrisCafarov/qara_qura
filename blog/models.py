@@ -56,6 +56,7 @@ class Contact(models.Model):
 class AboutHeader(models.Model):
     header = models.CharField(max_length=100,verbose_name="Header")
     content = models.TextField(verbose_name="Content")
+    little_header = models.TextField(null=True)
 
     def __str__(self):
         return self.header
