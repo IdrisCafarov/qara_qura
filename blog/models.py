@@ -28,6 +28,7 @@ class Product(models.Model):
     
 
 class About(models.Model):
+    title_1_little = models.CharField(max_length=150,verbose_name="Tittle 1 Little",null=True)
     title_1 = models.CharField(max_length=150,verbose_name="Title 1",null=True)
     title_2 = models.CharField(max_length=150,verbose_name="Title 2",null=True)
 
@@ -35,8 +36,8 @@ class About(models.Model):
         return "About"
 
     class Meta:
-        verbose_name = "About"
-        verbose_name_plural = "About"
+        verbose_name = "About Title"
+        verbose_name_plural = "About Titles"
     
 
 
@@ -56,14 +57,14 @@ class Contact(models.Model):
 class AboutHeader(models.Model):
     header = models.CharField(max_length=100,verbose_name="Header")
     content = models.TextField(verbose_name="Content")
-    little_header = models.TextField(null=True)
+    # little_header = models.TextField(null=True)
 
     def __str__(self):
         return self.header
 
     class Meta:
-        verbose_name = "About Header"
-        verbose_name_plural = "About Header"
+        verbose_name = "About Content"
+        verbose_name_plural = "About Contents"
     
 
 class AboutHeader_2(models.Model):
@@ -74,8 +75,8 @@ class AboutHeader_2(models.Model):
         return self.header
 
     class Meta:
-        verbose_name = "About Header 2"
-        verbose_name_plural = "About Header 2"
+        verbose_name = "About Content 2"
+        verbose_name_plural = "About Contents 2"
 
 
 class Instructor(models.Model):
