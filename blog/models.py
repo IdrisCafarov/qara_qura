@@ -33,6 +33,10 @@ class About(models.Model):
 
     def __str__(self):
         return "About"
+
+    class Meta:
+        verbose_name = "About"
+        verbose_name_plural = "About"
     
 
 
@@ -55,6 +59,10 @@ class AboutHeader(models.Model):
 
     def __str__(self):
         return self.header
+
+    class Meta:
+        verbose_name = "About Header"
+        verbose_name_plural = "About Header"
     
 
 class AboutHeader_2(models.Model):
@@ -63,6 +71,10 @@ class AboutHeader_2(models.Model):
 
     def __str__(self):
         return self.header
+
+    class Meta:
+        verbose_name = "About Header 2"
+        verbose_name_plural = "About Header 2"
 
 
 class Instructor(models.Model):
