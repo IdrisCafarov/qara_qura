@@ -65,15 +65,23 @@ class SolutionCreateView(viewsets.ModelViewSet):
     queryset = Solution.objects.all()
     serializer_class = CreateSolutionSerializer
     parser_classes = (MultiPartParser, FormParser)
+    http_method_names = ['post', ]
 
     def perform_create(self, serializer):
         return serializer.save()
 
-    def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data,many=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=201)
+    def create(self, request, *args, **kwargs):
+        documents = request.FILES.getlist('document', None)
+        # print(documents)
+        data = {
+            "title": request.POST.get('title', None),
+            }
+        _serializer = self.serializer_class(data=data, context={'documents': documents})
+        if _serializer.is_valid():
+            _serializer.save()
+            return Response(data=_serializer.data, status=status.HTTP_201_CREATED)  # NOQA
+        else:
+            return Response(data=_serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # NOQA
 
 
 class ProductListView(viewsets.ModelViewSet):

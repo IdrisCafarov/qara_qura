@@ -37,7 +37,7 @@ class CreateProductSerializer(serializers.ModelSerializer):
         # print(documents)
         post = Product.objects.create(**validated_data)
         for document in documents:
-            print(document)
+            # print(document)
             Product.objects.create(image=document)
         return post
         
@@ -48,17 +48,25 @@ class CreateProductSerializer(serializers.ModelSerializer):
 
 class CreateSolutionSerializer(serializers.ModelSerializer):
 
-    image = serializers.ImageField(required=False)
+    # image = serializers.ImageField(required=False)
     
-    class Meta:
-        model = Solution
-        fields = ('image','product','description')
+    # class Meta:
+    #     model = Solution
+    #     fields = ('image','product','description')
 
+    # def create(self, validated_data):
+    #     instance = Solution.objects.create(
+    #         **validated_data
+    #     )
+    #     return instance
     def create(self, validated_data):
-        instance = Solution.objects.create(
-            **validated_data
-        )
-        return instance
+        documents = self.context['documents']
+        # print(documents)
+        post = Solution.objects.create(**validated_data)
+        for document in documents:
+            # print(document)
+            Solution.objects.create(image=document)
+        return post
 
 
 class ProductSerializer(serializers.ModelSerializer):

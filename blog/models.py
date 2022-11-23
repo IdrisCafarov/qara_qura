@@ -20,6 +20,8 @@ class Product(models.Model):
     updated_date = models.DateTimeField(auto_now_add=True)
     description = models.TextField(verbose_name="Description",null=True,blank=True)
     draft = models.BooleanField(verbose_name="Show",default=False)
+    problem = models.TextField(null=True)
+    solution_text = models.TextField(null=True)
 
     def __str__(self):
         return str(self.id)
@@ -90,10 +92,7 @@ class Instructor(models.Model):
 
 
 class Solution(models.Model):
-    image_1 = models.ImageField(upload_to="Images",verbose_name="Add Image")
-    image_2 = models.ImageField(upload_to="Images",verbose_name="Add Image",null=True,blank=True)
-    image_3 = models.ImageField(upload_to="Images",verbose_name="Add Image",null=True,blank=True)
-    image_4 = models.ImageField(upload_to="Images",verbose_name="Add Image",null=True,blank=True)
+    image = models.ImageField(upload_to="Images",verbose_name="Add Image",null=True)
     product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name="solution")
     created_date = models.DateTimeField(auto_now=True)
     updated_date = models.DateTimeField(auto_now_add=True)
