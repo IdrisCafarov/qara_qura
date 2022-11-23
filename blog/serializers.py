@@ -68,6 +68,10 @@ class CreateSolutionSerializer(serializers.ModelSerializer):
             Solution.objects.create(image=document)
         return post
 
+    class Meta:
+        model = Product
+        fields = ('image',)
+
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
