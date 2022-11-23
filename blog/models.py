@@ -99,6 +99,11 @@ class Solution(models.Model):
     description = models.TextField(verbose_name="Description",null=True,blank=True)
 
 
+    def __str__(self):
+        return "solution for "+ str(self.product.id)
+    
+
+
     
     
 
