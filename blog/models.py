@@ -24,8 +24,8 @@ class Product(models.Model):
     updated_date = models.DateTimeField(auto_now_add=True)
     description = models.TextField(verbose_name="Description",null=True,blank=True)
     draft = models.BooleanField(verbose_name="Show",default=False)
-    problem = models.TextField(null=True)
-    solution_text = models.TextField(null=True)
+    problem = models.TextField(null=True,blank=True)
+    solution_text = models.TextField(null=True,blank=True)
 
     def __str__(self):
         return str(self.id)
