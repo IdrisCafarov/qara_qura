@@ -69,8 +69,8 @@ class CreateSolutionSerializer(serializers.ModelSerializer):
         return post
 
     class Meta:
-        model = Product
-        fields = ('image',)
+        model = Solution
+        fields = ('image','product',)
 
 
 class ProductSerializer(serializers.ModelSerializer):
