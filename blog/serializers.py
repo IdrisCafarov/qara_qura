@@ -73,7 +73,7 @@ class CreateSolutionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Solution
-        fields = ('image','product',)
+        fields = ('image',)
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
