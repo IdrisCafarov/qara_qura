@@ -36,7 +36,7 @@ class CreateProductSerializer(serializers.ModelSerializer):
         documents = self.context['documents']
         # print(documents)
         post = Product.objects.create(**validated_data)
-        for document in documents:
+        for document in documents[1:]:
             # print(document)
             Product.objects.create(image=document)
         return post
