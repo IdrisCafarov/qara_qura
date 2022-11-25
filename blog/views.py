@@ -78,7 +78,7 @@ class SolutionCreateView(viewsets.ModelViewSet):
 
         
 class ProductListView(viewsets.ModelViewSet):
-    queryset = Product.objects.filter(draft=True)
+    queryset = Product.objects.filter(draft=True).order_by('turn')
     parser_classes = (MultiPartParser, FormParser)
     
     # pagination_class = CustomPagination
