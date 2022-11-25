@@ -90,7 +90,7 @@ class SolutionSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        response['product'] = SolutionSerializer(instance.product).data
+        response['product'] = ProductSerializer(instance.product).data
         return response
 
 
