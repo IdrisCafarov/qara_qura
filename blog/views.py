@@ -103,7 +103,7 @@ class ProductListView(viewsets.ModelViewSet):
 
 
 class SolutionListView(viewsets.ModelViewSet):
-    queryset = Solution.objects.all()
+    queryset = Solution.objects.filter(show=True)
     parser_classes = (MultiPartParser, FormParser)
     
     # pagination_class = CustomPagination
@@ -205,7 +205,7 @@ class solution_detail(viewsets.ModelViewSet):
     def get_queryset(self, *args, **kwargs):
         id = self.kwargs["id"]
         
-        queryset = get_list_or_404(Solution,id=id)
+        queryset = get_list_or_404(Solution,id=id,show=True)
 
         return queryset
 

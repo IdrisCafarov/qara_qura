@@ -100,6 +100,7 @@ class Solution(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name="product",null=True,blank=True)
     created_date = models.DateTimeField(auto_now=True)
     updated_date = models.DateTimeField(auto_now_add=True)
+    show = models.BooleanField(default=False,verbose_name="Show")
     description = models.TextField(verbose_name="Description",null=True,blank=True)
 
 
