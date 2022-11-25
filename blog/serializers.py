@@ -48,32 +48,29 @@ class CreateProductSerializer(serializers.ModelSerializer):
 
 class CreateSolutionSerializer(serializers.ModelSerializer):
 
-    # image = serializers.ImageField(required=False)
+    image = serializers.ImageField(required=False)
     
-    # class Meta:
-    #     model = Solution
-    #     fields = ('image','product','description')
+    class Meta:
+        model = Solution
+        fields = ('image','product','description')
 
-    # def create(self, validated_data):
-    #     instance = Solution.objects.create(
-    #         **validated_data
-    #     )
-    #     return instance
     def create(self, validated_data):
-        documents = self.context['documents']
-        product_id = self.context['product_id']
-        for id in product_id:
-            new_id = id
-        # print(documents)
-        post = Solution.objects.create(**validated_data)
-        for document in documents:
-            # print(document)
-            Solution.objects.create(image=document,product_id=new_id)
-        return post
+        instance = Solution.objects.create(
+            **validated_data
+        )
+        return instance
+    # def create(self, validated_data):
+    #     documents = self.context['documents']
+    #     # print(documents)
+    #     post = Solution.objects.create(**validated_data)
+    #     for document in documents:
+    #         # print(document)
+    #         Solution.objects.create(image=document)
+    #     return post
 
     class Meta:
         model = Solution
-        fields = ('image',)
+        fields = ('image','product',)
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
@@ -93,7 +90,7 @@ class SolutionSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        response['product'] = ProductSerializer(instance.product).data
+        response['product'] = SolutionSerializer(instance.product).data
         return response
 
 
