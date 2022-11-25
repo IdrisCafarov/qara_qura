@@ -97,7 +97,7 @@ class Instructor(models.Model):
 
 class Solution(models.Model):
     image = models.ImageField(upload_to="Images",verbose_name="Add Image",null=True)
-    product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name="solution")
+    product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name="product")
     created_date = models.DateTimeField(auto_now=True)
     updated_date = models.DateTimeField(auto_now_add=True)
     description = models.TextField(verbose_name="Description",null=True,blank=True)

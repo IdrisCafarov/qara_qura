@@ -72,6 +72,11 @@ class CreateSolutionSerializer(serializers.ModelSerializer):
         model = Solution
         fields = ('image','product',)
 
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['product'] = CreateSolutionSerializer(instance.product).data
+        return response
+
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -82,6 +87,11 @@ class SolutionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Solution
         fields = '__all__'
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['product'] = ProductSerializer(instance.product).data
+        return response
 
 
 class GeneralSettingsSerializer(serializers.ModelSerializer):
