@@ -72,11 +72,12 @@ class SolutionCreateView(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         documents = request.FILES.getlist('document', None)
+        product_id = request.POST.get('product_id',None)
         # print(documents)
         data = {
             "title": request.POST.get('title', None),
             }
-        _serializer = self.serializer_class(data=data, context={'documents': documents})
+        _serializer = self.serializer_class(data=data, context={'documents': documents,'product_id':product_id})
         if _serializer.is_valid():
             _serializer.save()
             return Response(data=_serializer.data, status=status.HTTP_201_CREATED)  # NOQA

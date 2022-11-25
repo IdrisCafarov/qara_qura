@@ -61,11 +61,14 @@ class CreateSolutionSerializer(serializers.ModelSerializer):
     #     return instance
     def create(self, validated_data):
         documents = self.context['documents']
+        product_id = self.context['product_id']
+        for id in product_id:
+            new_id = id
         # print(documents)
         post = Solution.objects.create(**validated_data)
         for document in documents:
             # print(document)
-            Solution.objects.create(image=document)
+            Solution.objects.create(image=document,product_id=new_id)
         return post
 
     class Meta:
@@ -74,7 +77,7 @@ class CreateSolutionSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        response['product'] = CreateSolutionSerializer(instance.product).data
+        response['product'] = ProductSerializer(instance.product).data
         return response
 
 
