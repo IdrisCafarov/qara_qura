@@ -7,9 +7,9 @@ from ckeditor.fields import RichTextField
 class GeneralSettings(models.Model):
     logo = models.FileField(upload_to="Logo")
     header_text = models.TextField()
-    instagram = models.CharField(max_length=50)
-    linkedin = models.CharField(max_length=50)
-    facebook = models.CharField(max_length=50,null=True)
+    instagram = models.CharField(max_length=50,null=True,blank=True)
+    linkedin = models.CharField(max_length=50,null=True,blank=True)
+    facebook = models.CharField(max_length=50,null=True,blank=True)
 
     class Meta:
         verbose_name = "General Settings"
@@ -40,9 +40,9 @@ class Product(models.Model):
     
 
 class About(models.Model):
-    title_1_little = models.CharField(max_length=150,verbose_name="Tittle 1 Little",null=True)
-    title_1 = models.CharField(max_length=150,verbose_name="Title 1",null=True)
-    title_2 = models.CharField(max_length=150,verbose_name="Title 2",null=True)
+    title_1_little = models.CharField(max_length=150,verbose_name="Tittle 1 Little",null=True,blank=True)
+    title_1 = models.CharField(max_length=150,verbose_name="Title 1",null=True,blank=True)
+    title_2 = models.CharField(max_length=150,verbose_name="Title 2",null=True,blank=True)
 
     def __str__(self):
         return "About"
