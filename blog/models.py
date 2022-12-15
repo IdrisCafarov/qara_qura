@@ -40,9 +40,9 @@ class Product(models.Model):
     
 
 class About(models.Model):
-    title_1_little = models.CharField(max_length=150,verbose_name="Tittle 1 Little",null=True,blank=True)
-    title_1 = models.CharField(max_length=150,verbose_name="Title 1",null=True,blank=True)
-    title_2 = models.CharField(max_length=150,verbose_name="Title 2",null=True,blank=True)
+    title_1_little = models.CharField(max_length=1500,verbose_name="Tittle 1 Little",null=True,blank=True)
+    title_1 = models.CharField(max_length=1500,verbose_name="Title 1",null=True,blank=True)
+    title_2 = models.CharField(max_length=1500,verbose_name="Title 2",null=True,blank=True)
 
     def __str__(self):
         return "About"
