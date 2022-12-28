@@ -6,7 +6,7 @@ from ckeditor.fields import RichTextField
 
 class GeneralSettings(models.Model):
     logo = models.FileField(upload_to="Logo")
-    header_text = models.TextField()
+    header_text = RichTextField()
     instagram = models.CharField(max_length=50,null=True,blank=True)
     linkedin = models.CharField(max_length=50,null=True,blank=True)
     facebook = models.CharField(max_length=50,null=True,blank=True)
@@ -23,10 +23,10 @@ class Product(models.Model):
     created_date = models.DateTimeField(auto_now=True)
     updated_date = models.DateTimeField(auto_now_add=True)
     turn = models.PositiveIntegerField(default=0)
-    description = models.TextField(verbose_name="Description",null=True,blank=True)
+    description = RichTextField(verbose_name="Description",null=True,blank=True)
     draft = models.BooleanField(verbose_name="Show",default=False)
-    problem = models.TextField(null=True,blank=True)
-    solution_text = models.TextField(null=True,blank=True)
+    problem = RichTextField(null=True,blank=True)
+    solution_text = RichTextField(null=True,blank=True)
     
 
     def __str__(self):
@@ -40,9 +40,9 @@ class Product(models.Model):
     
 
 class About(models.Model):
-    title_1_little = models.TextField(verbose_name="Tittle 1 Little",null=True,blank=True)
-    title_1 = models.TextField(verbose_name="Title 1",null=True,blank=True)
-    title_2 = models.TextField(verbose_name="Title 2",null=True,blank=True)
+    title_1_little = RichTextField(verbose_name="Tittle 1 Little",null=True,blank=True)
+    title_1 = RichTextField(verbose_name="Title 1",null=True,blank=True)
+    title_2 = RichTextField(verbose_name="Title 2",null=True,blank=True)
 
     def __str__(self):
         return "About"
@@ -59,7 +59,7 @@ class Contact(models.Model):
     surname = models.CharField(max_length=25,verbose_name="Surname",null=True)
     number = models.CharField(max_length=20,verbose_name="Number",null=True)
     email = models.EmailField(max_length=30,verbose_name="Email")
-    text = models.TextField(verbose_name="Message")
+    text = RichTextField(verbose_name="Message")
 
     def __str__(self):
         return self.email
@@ -67,8 +67,8 @@ class Contact(models.Model):
 
 
 class AboutHeader(models.Model):
-    header = models.CharField(max_length=100,verbose_name="Header")
-    content = models.TextField(verbose_name="Content")
+    header = RichTextField(max_length=100,verbose_name="Header")
+    content = RichTextField(verbose_name="Content")
     # little_header = models.TextField(null=True)
 
     def __str__(self):
@@ -80,8 +80,8 @@ class AboutHeader(models.Model):
     
 
 class AboutHeader_2(models.Model):
-    header = models.CharField(max_length=100,verbose_name="Header")
-    content = models.TextField(verbose_name="Content")
+    header = RichTextField(max_length=100,verbose_name="Header")
+    content = RichTextField(verbose_name="Content")
 
     def __str__(self):
         return self.header
@@ -107,7 +107,7 @@ class Solution(models.Model):
     created_date = models.DateTimeField(auto_now=True)
     updated_date = models.DateTimeField(auto_now_add=True)
     show = models.BooleanField(default=False,verbose_name="Show")
-    description = models.TextField(verbose_name="Description",null=True,blank=True)
+    description = RichTextField(verbose_name="Description",null=True,blank=True)
 
 
     # def __str__(self):
