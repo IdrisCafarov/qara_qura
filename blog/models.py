@@ -20,6 +20,9 @@ class GeneralSettings(models.Model):
 
 class Product(models.Model):
     image = models.ImageField(upload_to="Images",verbose_name="Add Image",null=True)
+    name = models.CharField(max_length=100,null=True, blank=True)
+    surname = models.CharField(max_length=100,null=True, blank=True)
+    social_link = models.TextField(null=True, blank=True)
     created_date = models.DateTimeField(auto_now=True)
     updated_date = models.DateTimeField(auto_now_add=True)
     turn = models.PositiveIntegerField(default=0)
