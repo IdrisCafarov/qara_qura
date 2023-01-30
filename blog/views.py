@@ -51,11 +51,12 @@ class ProductCreateView(viewsets.ModelViewSet):
         documents = request.FILES.getlist('document', None)
         name = request.POST.get('name',None)
         surname = request.POST.get('surname',None)
+        social_link = request.POST.get('social_link',None)
         # print(documents)
         data = {
             "title": request.POST.get('title', None),
             }
-        _serializer = self.serializer_class(data=data, context={'documents': documents, 'name':name, 'surname':surname})
+        _serializer = self.serializer_class(data=data, context={'documents': documents, 'name':name, 'surname':surname, 'social_link':social_link})
         if _serializer.is_valid():
             _serializer.save()
             return Response(data=_serializer.data, status=status.HTTP_201_CREATED)  # NOQA

@@ -36,6 +36,7 @@ class CreateProductSerializer(serializers.ModelSerializer):
         documents = self.context['documents']
         name = self.context['name']
         surname = self.context['surname']
+        social_link = self.context['social_link']
 
         # for i in name:
         #     new_name = i
@@ -48,7 +49,7 @@ class CreateProductSerializer(serializers.ModelSerializer):
         post = Product.objects.create(**validated_data)
         for document in documents:
             # print(document)
-            Product.objects.create(image=document, name=name, surname=surname)
+            Product.objects.create(image=document, name=name, surname=surname, social_link=social_link)
         return post
         
 
