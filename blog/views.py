@@ -49,7 +49,8 @@ class ProductCreateView(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         documents = request.FILES.getlist('document', None)
-        forms = request.POST.get('forms',None)
+        name = request.POST.get('name',None)
+        surname = request.POST.get('surname',None)
         # print(documents)
         data = {
             "title": request.POST.get('title', None),

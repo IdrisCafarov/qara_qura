@@ -34,15 +34,15 @@ class CreateProductSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         documents = self.context['documents']
-        forms = self.context['forms']
-        # name = forms.name
-        # surname = forms.surname
-        # social_link = forms.social_link
+        name = self.context['name']
+        surname = self.context['surname']
+
+       
         # print(documents)
         post = Product.objects.create(**validated_data)
         for document in documents:
             # print(document)
-            Product.objects.create(image=document, name=forms.name, surname=forms.surname, social_link=forms.social_link)
+            Product.objects.create(image=document, name=name, surname=surname)
         return post
         
 
