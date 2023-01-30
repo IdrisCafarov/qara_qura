@@ -57,9 +57,7 @@ class CreateSolutionSerializer(serializers.ModelSerializer):
 
     image = serializers.ImageField(required=False)
     
-    class Meta:
-        model = Solution
-        fields = ('image','product','description')
+    
 
     def create(self, validated_data):
         instance = Solution.objects.create(
@@ -77,7 +75,7 @@ class CreateSolutionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Solution
-        fields = ('image','product',)
+        fields = ('image','product','name','surname','social_link')
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
