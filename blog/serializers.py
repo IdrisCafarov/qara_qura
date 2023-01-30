@@ -38,18 +38,14 @@ class CreateProductSerializer(serializers.ModelSerializer):
         surname = self.context['surname']
         social_link = self.context['social_link']
 
-        # for i in name:
-        #     new_name = i
-
-        # for i in surname:
-        #     new_surname = i
 
        
         # print(documents)
-        post = Product.objects.create(**validated_data)
+        # post = Product.objects.create(**validated_data)
+        post = "smth"
         for document in documents:
             # print(document)
-            Product.objects.create(image=document, name=name, surname=surname, social_link=social_link)
+            post = Product.objects.create(image=document, name=name, surname=surname, social_link=social_link)
         return post
         
 
