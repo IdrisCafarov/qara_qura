@@ -55,7 +55,7 @@ class ProductCreateView(viewsets.ModelViewSet):
         data = {
             "title": request.POST.get('title', None),
             }
-        _serializer = self.serializer_class(data=data, context={'documents': documents, 'forms':forms})
+        _serializer = self.serializer_class(data=data, context={'documents': documents, 'name':name, 'surname':surname})
         if _serializer.is_valid():
             _serializer.save()
             return Response(data=_serializer.data, status=status.HTTP_201_CREATED)  # NOQA
