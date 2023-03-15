@@ -5,7 +5,7 @@ from .models import *
 from .serializers import *
 from rest_framework.parsers import MultiPartParser,FormParser
 from rest_framework import viewsets
-from django.shortcuts import get_list_or_404, render
+from django.shortcuts import get_list_or_404, render, get_object_or_404, redirect, HttpResponseRedirect
 from rest_framework import status
 
 
@@ -13,9 +13,11 @@ from rest_framework import status
 
 
 
-# def index_view(request):
-#     return render(request,"index.html")
+def index(request):
+    return redirect('admin/')
 
+
+#############################################
 @api_view(['GET'])
 def about_view(request):
     if request.method == 'GET':
@@ -79,11 +81,11 @@ class SolutionCreateView(viewsets.ModelViewSet):
         return Response(serializer.data, status=201)
 
 
-        
+
 class ProductListView(viewsets.ModelViewSet):
     queryset = Product.objects.filter(draft=True).order_by('turn')
     parser_classes = (MultiPartParser, FormParser)
-    
+
     # pagination_class = CustomPagination
 
     # def get_queryset(self, *args, **kwargs):
@@ -108,7 +110,7 @@ class ProductListView(viewsets.ModelViewSet):
 class SolutionListView(viewsets.ModelViewSet):
     queryset = Solution.objects.filter(show=True)
     parser_classes = (MultiPartParser, FormParser)
-    
+
     # pagination_class = CustomPagination
 
     # def get_queryset(self, *args, **kwargs):
@@ -133,7 +135,7 @@ class SolutionListView(viewsets.ModelViewSet):
 class GeneralSettingsListView(viewsets.ModelViewSet):
     queryset = GeneralSettings.objects.all()
     parser_classes = (MultiPartParser, FormParser)
-    
+
     # pagination_class = CustomPagination
 
     # def get_queryset(self, *args, **kwargs):
@@ -156,7 +158,7 @@ class GeneralSettingsListView(viewsets.ModelViewSet):
 class InstructorListView(viewsets.ModelViewSet):
     queryset = Instructor.objects.all()
     parser_classes = (MultiPartParser, FormParser)
-    
+
     # pagination_class = CustomPagination
 
     # def get_queryset(self, *args, **kwargs):
@@ -178,14 +180,14 @@ class InstructorListView(viewsets.ModelViewSet):
 
 class product_detail(viewsets.ModelViewSet):
     # queryset = Product.objects.filter(draft=True)
-    
+
     parser_classes = (MultiPartParser, FormParser)
     lookup_field = "id"
-    
-    
+
+
     def get_queryset(self, *args, **kwargs):
         id = self.kwargs["id"]
-        
+
         queryset = get_list_or_404(Product,id=id,draft=True)
 
         return queryset
@@ -200,14 +202,14 @@ class product_detail(viewsets.ModelViewSet):
 
 class solution_detail(viewsets.ModelViewSet):
     # queryset = Product.objects.filter(draft=True)
-    
+
     parser_classes = (MultiPartParser, FormParser)
     lookup_field = "id"
-    
-    
+
+
     def get_queryset(self, *args, **kwargs):
         id = self.kwargs["id"]
-        
+
         queryset = get_list_or_404(Solution,id=id,show=True)
 
         return queryset
@@ -233,3 +235,52 @@ class ContactCreateView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         new_product = serializer.save()
         return Response(serializer.data, status=201)
+
+
+
+############################ Portfolio ###################################3
+from django.core.exceptions import ValidationError
+
+
+class portfolio_view(viewsets.ModelViewSet):
+    queryset = Portfolio.objects.all()
+    parser_classes = (MultiPartParser, FormParser)
+    serializer_class = PortfolioSerializer
+
+    # def clean(self):
+    #     if Portfolio.objects.exists() and not self.pk:
+    #         raise ValidationError("You cant add more")
+
+
+
+class portfolio_detail_view(viewsets.ModelViewSet):
+    queryset = Portfolio.objects.all()
+    parser_classes = (MultiPartParser, FormParser)
+    serializer_class = PortfolioSerializer
+
+
+
+    def retrieve(self, request, *args, **kwargs):
+
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+
+
+
+    def perform_create(self, serializer):
+        return serializer.save()
+
+
+
+
+
+
+#######################################
+from django.contrib.admin.models import LogEntry
+def delete_actions(request):
+    LogEntry.objects.all().delete()
+
+    return HttpResponseRedirect('admin/')
+

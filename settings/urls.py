@@ -17,12 +17,14 @@ from django.contrib import admin
 from django.urls import path , include
 from django.conf import settings
 from django.conf.urls.static import static
+from blog.admin import post_admin_site
 
 
 urlpatterns = [
     path('',include("blog.urls")),
-    path('', admin.site.urls),
-    
+    path('admin/', admin.site.urls, name="admin"),
+    path('2442264-admin/', post_admin_site.urls)
+
 ]
 
 

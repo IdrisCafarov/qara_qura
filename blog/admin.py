@@ -3,6 +3,10 @@ from .models import *
 
 # Register your models here.
 
+
+
+
+
 admin.site.register(Product)
 admin.site.register(Contact)
 admin.site.register(AboutHeader)
@@ -27,5 +31,56 @@ class AdminGeneralSettings(admin.ModelAdmin):
           if self.model.objects.count() >= MAX_OBJECTS:
                return False
           return super().has_add_permission(request)
-    
+
+########################### Second Admin Page ##############################
+
+class PostAdminSite(admin.AdminSite):
+    site_header = "Portfolio admin"
+    site_title = "Portfolio Admin Portal"
+    index_title = "Welcome to Portfolio"
+
+post_admin_site = PostAdminSite(name='post_admin')
+############################################ Porfolio ################################
+
+
+
+
+MAX_OBJECTS = 2
+
+
+class EducationInline(admin.StackedInline):
+    model = Education
+    max_num = 20
+    extra = 1
+
+class SpecializationInline(admin.StackedInline):
+    model = Specialization
+    max_num = 20
+    extra = 1
+
+class SkillInline(admin.StackedInline):
+    model = Skills
+    max_num = 20
+    extra = 1
+
+
+class AdminPortfolio(admin.ModelAdmin):
+    inlines = [EducationInline, SpecializationInline,SkillInline]
+
+    def has_add_permission(self, request):
+          if self.model.objects.count() >= MAX_OBJECTS:
+               return False
+          return super().has_add_permission(request)
+
+post_admin_site.register(Portfolio,AdminPortfolio)
+
+
+
+
+
+
+
+# @admin.register(Product)
+# class AdminWork(admin.ModelAdmin):
+#     inlines = [ImageInline,]
 

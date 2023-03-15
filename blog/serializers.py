@@ -21,7 +21,7 @@ class AboutHeader_2Serializer(serializers.ModelSerializer):
 class CreateProductSerializer(serializers.ModelSerializer):
 
     # image = serializers.ImageField(required=False)
-    
+
     # class Meta:
     #     model = Product
     #     fields = ('image','description')
@@ -39,7 +39,7 @@ class CreateProductSerializer(serializers.ModelSerializer):
         social_link = self.context['social_link']
 
 
-       
+
         # print(documents)
         # post = Product.objects.create(**validated_data)
         post = "smth"
@@ -47,7 +47,7 @@ class CreateProductSerializer(serializers.ModelSerializer):
             # print(document)
             post = Product.objects.create(image=document, name=name, surname=surname, social_link=social_link)
         return post
-        
+
 
     class Meta:
         model = Product
@@ -56,8 +56,8 @@ class CreateProductSerializer(serializers.ModelSerializer):
 class CreateSolutionSerializer(serializers.ModelSerializer):
 
     image = serializers.ImageField(required=False)
-    
-    
+
+
 
     def create(self, validated_data):
         instance = Solution.objects.create(
@@ -137,3 +137,37 @@ class CreateContactSerializer(serializers.ModelSerializer):
             **validated_data
         )
         return instance
+
+
+
+########################################## Portfolio ###################3
+class EducationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Education
+        fields = '__all__'
+
+class SpecializationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Specialization
+        fields = '__all__'
+
+
+class SkillsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Skills
+        fields = '__all__'
+
+
+
+class PortfolioSerializer(serializers.ModelSerializer):
+
+    # images = ProductImagesSerializer(many=True)
+    education = EducationSerializer(many=True)
+    specialization = SpecializationSerializer(many=True)
+    skills = SkillsSerializer(many=True)
+    class Meta:
+        model=Portfolio
+        fields='__all__'
+
+
+

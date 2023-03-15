@@ -30,7 +30,7 @@ class Product(models.Model):
     draft = models.BooleanField(verbose_name="Show",default=False)
     problem = RichTextField(null=True,blank=True)
     solution_text = RichTextField(null=True,blank=True)
-    
+
 
     def __str__(self):
         return str(self.id)
@@ -39,8 +39,8 @@ class Product(models.Model):
         verbose_name = "Galeries"
         verbose_name_plural = "Galeries"
 
-        
-    
+
+
 
 class About(models.Model):
     title_1_little = RichTextField(verbose_name="Tittle 1 Little",null=True,blank=True)
@@ -53,7 +53,7 @@ class About(models.Model):
     class Meta:
         verbose_name = "About Title"
         verbose_name_plural = "About Titles"
-    
+
 
 
 
@@ -80,7 +80,7 @@ class AboutHeader(models.Model):
     class Meta:
         verbose_name = "About Content"
         verbose_name_plural = "About Contents"
-    
+
 
 class AboutHeader_2(models.Model):
     header = RichTextField(max_length=100,verbose_name="Header")
@@ -118,12 +118,79 @@ class Solution(models.Model):
 
     # def __str__(self):
     #     return "solution for "+ str(self.product.id)
+
+from django.core.exceptions import ValidationError
+class Portfolio(models.Model):
+
+    name = models.CharField(max_length=100)
+    image = models.FileField(upload_to="Ravan_pp")
+
+    positon =  models.CharField(max_length=100, null=True, blank=True)
+
+    mail = models.CharField(max_length=500,null=True,blank=True)
+    adress = models.CharField(max_length=100, null=True,blank=True)
+
+    linkedin = models.CharField(max_length=500,null=True,blank=True)
+    github = models.CharField(max_length=500,null=True,blank=True)
+    twitter = models.CharField(max_length=500,null=True,blank=True)
+    instagram = models.CharField(max_length=500,null=True,blank=True)
+    facebook = models.CharField(max_length=500,null=True,blank=True)
+
+    ####
+
+    page_title = models.CharField(max_length=300)
+    title_about = models.CharField(max_length=300)
+    experience_year = models.PositiveIntegerField(default=1)
+    projects_count = models.PositiveIntegerField(default=1)
+
+    ######
+    about_title = models.CharField(max_length=300)
+    about_main = models.TextField()
+
+    def __str__(self):
+        return self.name
     
 
 
-    
-    
+    # def clean(self):
+    #     if Portfolio.objects.exists() and not self.pk:
+    #         raise ValidationError("You can only have one company")
 
-    
-    
+
+    # def save(self, *args, **kwargs):
+    #    return super(Portfolio, self).save(*args, **kwargs) #saves the record
+
+
+
+
+class Education(models.Model):
+    user_port = models.ForeignKey(Portfolio,on_delete=models.CASCADE, related_name="education")
+    title = models.CharField(max_length=300)
+    place = models.CharField(max_length=300)
+    start_year = models.CharField(max_length=100)
+    end_year = models.CharField(max_length=100)
+
+class Specialization(models.Model):
+    user_port = models.ForeignKey(Portfolio,on_delete=models.CASCADE, related_name="specialization")
+    title = models.CharField(max_length=100)
+    about = models.CharField(max_length=200)
+    count = models.PositiveIntegerField(default=0)
+
+class Skills(models.Model):
+    user_port = models.ForeignKey(Portfolio,on_delete=models.CASCADE, related_name="skills")
+    name = models.CharField(max_length=100)
+    image = models.FileField(upload_to="Skills")
+
+
+
+
+
+
+
+
+
+
+
+
+
 
