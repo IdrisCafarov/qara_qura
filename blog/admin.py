@@ -64,7 +64,15 @@ class SkillInline(admin.StackedInline):
     extra = 1
 
 
-class AdminPortfolio(admin.ModelAdmin):
+class DontLog:
+    def log_addition(self, *args):
+        return
+    def log_change(self, *args):
+        return
+    def log_deletion(self, *args):
+        return
+
+class AdminPortfolio(DontLog,admin.ModelAdmin):
     inlines = [EducationInline, SpecializationInline,SkillInline]
 
     def has_add_permission(self, request):
