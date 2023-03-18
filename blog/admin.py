@@ -45,7 +45,7 @@ post_admin_site = PostAdminSite(name='post_admin')
 
 
 
-MAX_OBJECTS = 2
+MAX_OBJECTS = 3
 
 
 class EducationInline(admin.StackedInline):
@@ -98,10 +98,10 @@ class TechInline(admin.StackedInline):
 class AdminProject(DontLog,admin.ModelAdmin):
     inlines = [ImagesInline, TechInline]
 
-    def has_add_permission(self, request):
-          if self.model.objects.count() >= MAX_OBJECTS:
-               return False
-          return super().has_add_permission(request)
+    # def has_add_permission(self, request):
+    #       if self.model.objects.count() >= MAX_OBJECTS:
+    #            return False
+    #       return super().has_add_permission(request)
 
 post_admin_site.register(Project,AdminProject)
 
