@@ -223,6 +223,7 @@ class Project(models.Model):
     name = models.CharField(max_length=100)
     main_title = models.CharField(max_length=200)
     main_image = models.ImageField(upload_to='ProjectImages')
+    video_link = models.CharField(max_length=10000, null=True)
     url = models.CharField(max_length=500)
     text = models.TextField()
 
@@ -240,7 +241,7 @@ class Technologies(models.Model):
 
     def __str__(self):
         return self.name
-    
+
 
 
 
