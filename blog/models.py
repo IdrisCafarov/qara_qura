@@ -119,7 +119,40 @@ class Solution(models.Model):
     # def __str__(self):
     #     return "solution for "+ str(self.product.id)
 
+from django_base64field.fields import Base64Field
 from django.core.exceptions import ValidationError
+
+
+
+#################### base 64 decoder ########################
+from django.core.files.base import ContentFile
+import uuid
+
+import base64
+import os
+
+from django.conf import settings
+
+
+def image_as_base64(image_file, format='png'):
+    """
+    :param `image_file` for the complete path of image.
+    :param `format` is format for image, eg: `png` or `jpg`.
+    """
+    if not os.path.isfile(image_file):
+        return None
+
+    encoded_string = ''
+    with open(image_file, 'rb') as img_f:
+        encoded_string = base64.b64encode(img_f.read())
+    return 'data:image/%s;base64,%s' % (format, encoded_string)
+
+#########################################################
+
+
+
+
+
 class Portfolio(models.Model):
 
     name = models.CharField(max_length=100)
@@ -149,7 +182,7 @@ class Portfolio(models.Model):
 
     def __str__(self):
         return self.name
-    
+
 
 
     # def clean(self):
@@ -183,6 +216,31 @@ class Skills(models.Model):
 
 
 
+
+
+class Project(models.Model):
+    user = models.ForeignKey(Portfolio, on_delete=models.CASCADE, related_name="projects")
+    name = models.CharField(max_length=100)
+    main_title = models.CharField(max_length=200)
+    main_image = models.ImageField(upload_to='ProjectImages')
+    url = models.CharField(max_length=500)
+    text = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+class ProjectImages(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="images")
+    image = models.FileField(upload_to="ProjectImages")
+
+
+class Technologies(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="technology")
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+    
 
 
 

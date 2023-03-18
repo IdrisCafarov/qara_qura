@@ -84,11 +84,28 @@ post_admin_site.register(Portfolio,AdminPortfolio)
 
 
 
+class ImagesInline(admin.StackedInline):
+    model = ProjectImages
+    max_num = 20
+    extra = 1
+
+class TechInline(admin.StackedInline):
+    model = Technologies
+    max_num = 20
+    extra = 1
+
+
+class AdminProject(DontLog,admin.ModelAdmin):
+    inlines = [ImagesInline, TechInline]
+
+    def has_add_permission(self, request):
+          if self.model.objects.count() >= MAX_OBJECTS:
+               return False
+          return super().has_add_permission(request)
+
+post_admin_site.register(Project,AdminProject)
 
 
 
 
-# @admin.register(Product)
-# class AdminWork(admin.ModelAdmin):
-#     inlines = [ImageInline,]
 

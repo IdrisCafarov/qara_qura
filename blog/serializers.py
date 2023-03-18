@@ -158,10 +158,30 @@ class SkillsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ProjectImagesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectImages
+        fields = '__all__'
+
+class ProjectTechSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Technologies
+        fields = '__all__'
+
+class ProjectSerializer(serializers.ModelSerializer):
+    images = ProjectImagesSerializer(many=True)
+    technology = ProjectTechSerializer(many=True)
+
+    class Meta:
+        model = Project
+        fields = '__all__'
+
+
 
 class PortfolioSerializer(serializers.ModelSerializer):
 
     # images = ProductImagesSerializer(many=True)
+    projects = ProjectSerializer(many=True)
     education = EducationSerializer(many=True)
     specialization = SpecializationSerializer(many=True)
     skills = SkillsSerializer(many=True)
