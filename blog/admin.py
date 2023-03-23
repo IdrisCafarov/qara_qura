@@ -58,6 +58,12 @@ class ExperienceInline(admin.StackedInline):
     max_num = 20
     extra = 1
 
+
+class CertificateInline(admin.StackedInline):
+    model = Certificate
+    max_num = 20
+    extra = 1
+
 class SpecializationInline(admin.StackedInline):
     model = Specialization
     max_num = 20
@@ -78,7 +84,7 @@ class DontLog:
         return
 
 class AdminPortfolio(DontLog,admin.ModelAdmin):
-    inlines = [EducationInline, SpecializationInline,SkillInline, ExperienceInline]
+    inlines = [EducationInline, SpecializationInline,SkillInline, ExperienceInline, CertificateInline]
 
     def has_add_permission(self, request):
           if self.model.objects.count() >= MAX_OBJECTS:
