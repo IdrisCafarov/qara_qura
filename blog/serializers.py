@@ -198,7 +198,7 @@ class PortfolioSerializer(serializers.ModelSerializer):
 
 
 
-    projects = ProjectSerializer(many=True)
+    # projects = ProjectSerializer(many=True)
     education = EducationSerializer(many=True)
     specialization = SpecializationSerializer(many=True)
     skills = SkillsSerializer(many=True)

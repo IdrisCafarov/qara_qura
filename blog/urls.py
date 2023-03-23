@@ -46,6 +46,16 @@ urlpatterns = [
     path("portfolio/", portfolio_view.as_view({
     'get': 'list',
     }), name="portfolio_list"),
+
+
+    path("project/", projects_view.as_view({
+    'get': 'list',
+    }), name="project_list"),
+    path("project/<pk>/", project_detail_view.as_view({
+    'get': 'retrieve',
+    }), name="project_detail"),
+
+    
     path('delete_actions',delete_actions,name="delete_actions"),
     path("portfolio/<pk>/", portfolio_detail_view.as_view({
     'get': 'retrieve',

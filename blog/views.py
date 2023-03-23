@@ -274,6 +274,30 @@ class portfolio_detail_view(viewsets.ModelViewSet):
 
 
 
+class projects_view(viewsets.ModelViewSet):
+    queryset = Project.objects.all()
+    parser_classes = (MultiPartParser, FormParser)
+    serializer_class = ProjectSerializer
+
+
+class project_detail_view(viewsets.ModelViewSet):
+    queryset = Project.objects.all()
+    parser_classes = (MultiPartParser, FormParser)
+    serializer_class = ProjectSerializer
+
+
+
+    def retrieve(self, request, *args, **kwargs):
+
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+
+
+
+    def perform_create(self, serializer):
+        return serializer.save()
 
 
 
