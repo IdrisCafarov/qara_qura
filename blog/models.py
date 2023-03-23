@@ -165,7 +165,7 @@ class Portfolio(models.Model):
 
     linkedin = models.CharField(max_length=500,null=True,blank=True)
     github = models.CharField(max_length=500,null=True,blank=True)
-    twitter = models.CharField(max_length=500,null=True,blank=True)
+    whatsapp = models.CharField(max_length=500,null=True,blank=True)
     instagram = models.CharField(max_length=500,null=True,blank=True)
     facebook = models.CharField(max_length=500,null=True,blank=True)
 
@@ -202,6 +202,14 @@ class Education(models.Model):
     place = models.CharField(max_length=300)
     start_year = models.CharField(max_length=100)
     end_year = models.CharField(max_length=100)
+
+class Experience(models.Model):
+    user_port = models.ForeignKey(Portfolio, on_delete=models.CASCADE, related_name="experience")
+    title = models.CharField(max_length=300)
+    place = models.CharField(max_length=300)
+    start_year = models.CharField(max_length=100)
+    end_year = models.CharField(max_length=100)
+
 
 class Specialization(models.Model):
     user_port = models.ForeignKey(Portfolio,on_delete=models.CASCADE, related_name="specialization")
