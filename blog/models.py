@@ -207,6 +207,7 @@ class Certificate(models.Model):
     user_port = models.ForeignKey(Portfolio, on_delete=models.CASCADE, related_name="certificate")
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to="Certificate")
+    url = models.CharField(max_length=1000, null=True)
     text = models.TextField()
 
 class Experience(models.Model):
