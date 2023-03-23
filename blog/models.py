@@ -173,7 +173,7 @@ class Portfolio(models.Model):
 
     page_title = models.CharField(max_length=300)
     title_about = models.CharField(max_length=300)
-    experience_year = models.PositiveIntegerField(default=1)
+    experience_year = models.FloatField(default=1)
     projects_count = models.PositiveIntegerField(default=1)
 
     ######
