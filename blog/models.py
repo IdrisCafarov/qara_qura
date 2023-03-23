@@ -168,6 +168,8 @@ class Portfolio(models.Model):
     whatsapp = models.CharField(max_length=500,null=True,blank=True)
     instagram = models.CharField(max_length=500,null=True,blank=True)
     facebook = models.CharField(max_length=500,null=True,blank=True)
+    telegram = models.CharField(max_length=500,null=True,blank=True)
+
 
     ####
 
